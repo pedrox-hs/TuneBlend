@@ -29,6 +29,8 @@ android {
 dependencies {
     implementation(libs.bundles.android.layout)
 
+    implementation(projects.features.login.presentation.android)
+
     testImplementation(libs.bundles.testing.unit)
 
     androidTestImplementation(libs.bundles.testing.android)
