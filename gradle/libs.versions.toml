@@ -9,6 +9,10 @@ minSdk = "24"
 androidx-core-ktx = "1.12.0"
 androidx-appcompat = "1.6.1"
 google-material = "1.9.0"
+composeBom = "2023.09.00"
+composeCompiler = "1.5.3"
+composeActivity = "1.7.2"
+composeNavigation = "2.7.2"
 
 junit = "4.13.2"
 
@@ -20,6 +24,12 @@ espresso = "3.5.1"
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 google-material = { module = "com.google.android.material:material", version.ref = "google-material" }
+
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
+compose-nav = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 
 testing-junit = { module = "junit:junit", version.ref = "junit" }
 
@@ -37,7 +47,11 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 android-layout = [
     "androidx-core-ktx",
     "androidx-appcompat",
-    "google-material"
+    "google-material",
+    "compose-activity",
+    "compose-nav",
+    "compose-ui",
+    "compose-material3"
 ]
 
 testing-unit = [

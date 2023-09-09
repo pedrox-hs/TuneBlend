@@ -5,4 +5,17 @@ plugins {
 
 android {
     namespace = "com.trilobitech.tuneblend.login"
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
+}
+
+dependencies {
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.android.layout)
 }
