@@ -1,0 +1,33 @@
+name: Autoapproval workflow
+
+on:
+  pull_request:
+    types: [ opened, reopened, ready_for_review, labeled, edited ]
+  pull_request_review:
+    types: [ dismissed ]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  autoapproval:
+    name: Autoapproval
+    runs-on: ubuntu-latest
+    if: ! github.event.pull_request.draft
+    steps:
+
+      - name: 'Wait for status checks'
+        id: waitforstatuschecks
+        uses: "WyriHaximus/github-action-wait-for-status@v2"
+        with:
+          ignoreActions: "Autoapproval"
+          checkInterval: 30
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Autoapproval
+        uses: pedrox-hs/autoapproval@main
+        if: steps.waitforstatuschecks.outputs.status == 'success'
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

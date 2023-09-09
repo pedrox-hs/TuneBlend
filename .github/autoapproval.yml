@@ -1,0 +1,7 @@
+from_owner:
+  - pedrox-hs
+required_labels: []
+apply_labels:
+  - automerge
+blacklisted_labels:
+  - wip
