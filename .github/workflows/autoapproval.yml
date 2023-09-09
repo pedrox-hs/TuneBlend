@@ -19,7 +19,7 @@ jobs:
 
       - name: 'Wait for status checks'
         id: waitforstatuschecks
-        uses: "WyriHaximus/github-action-wait-for-status@v2"
+        uses: "WyriHaximus/github-action-wait-for-status@47d6bc1a0a92ed8a9ba13b060f9f8c40ccd8b3ec"
         with:
           ignoreActions: "Autoapproval"
           checkInterval: 30
