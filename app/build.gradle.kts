@@ -5,12 +5,10 @@ plugins {
 
 android {
     namespace = "com.trilobitech.tuneblend"
-    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.trilobitech.tuneblend"
-        minSdk = 24
-        targetSdk = 33
+
         versionCode = 1
         versionName = "1.0"
 
@@ -26,17 +24,27 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+
+    buildFeatures {
+        compose = true
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 
 dependencies {
+    implementation(platform(libs.compose.bom))
     implementation(libs.bundles.android.layout)
+
+    implementation(projects.features.login.presentation.android)
 
     testImplementation(libs.bundles.testing.unit)
 
