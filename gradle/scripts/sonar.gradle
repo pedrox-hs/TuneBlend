@@ -10,6 +10,16 @@ allprojects {
             property("sonar.projectKey", projectKey)
             property("sonar.organization", organization)
             property("sonar.host.url", hostUrl ?: "https://sonarcloud.io")
+
+            property("sonar.androidLint.reportPaths", fileTree(
+                    dir: "${rootDir}",
+                    include: "**/build/reports/lint-results*.xml"
+            ).collect { it.absolutePath }.join(","))
+
+            property("sonar.kotlin.detekt.reportPaths", fileTree(
+                    dir: "${rootDir}",
+                    include: "**/build/reports/detekt/*.xml",
+            ).collect { it.absolutePath }.join(","))
         }
     }
 }
