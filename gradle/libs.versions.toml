@@ -1,7 +1,8 @@
 [versions]
 
-androidGradlePlugin = "8.1.0"
-kotlin = "1.8.22"
+androidGradlePlugin = "8.1.1"
+kotlin = "1.9.10"
+sonarCloud = "4.3.1.3277"
 
 androidx-core-ktx = "1.12.0"
 androidx-appcompat = "1.6.1"
@@ -27,6 +28,7 @@ testing-espresso-core = { module = "androidx.test.espresso:espresso-core", versi
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+sonarCloud = { id = "org.sonarqube", version.ref = "sonarCloud" }
 
 [bundles]
 
