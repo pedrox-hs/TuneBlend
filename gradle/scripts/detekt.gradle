@@ -7,4 +7,8 @@ allprojects {
         buildUponDefaultConfig = true
         autoCorrect = project.hasProperty("detekt.autoCorrect") && project.findProperty("detekt.autoCorrect") != "false"
     }
+
+    dependencies {
+        detektPlugins(libs.detekt.formatting)
+    }
 }
