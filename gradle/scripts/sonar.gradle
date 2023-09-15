@@ -1,0 +1,15 @@
+allprojects {
+    apply plugin: libs.plugins.sonarCloud.get().pluginId
+
+    sonar {
+        def projectKey = findProperty("sonar.projectKey") ?: System.getenv("SONAR_PROJECT_KEY")
+        def organization = findProperty("sonar.organization") ?: System.getenv("SONAR_ORGANIZATION")
+        def hostUrl = findProperty("sonar.host.url") ?: System.getenv("SONAR_HOST_URL")
+
+        properties {
+            property("sonar.projectKey", projectKey)
+            property("sonar.organization", organization)
+            property("sonar.host.url", hostUrl ?: "https://sonarcloud.io")
+        }
+    }
+}
