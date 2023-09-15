@@ -18,7 +18,7 @@ jobs:
   autoapproval:
     name: Autoapproval
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.labels.some(label => label.name == 'ready') && ! github.event.pull_request.draft }}
+    if: ${{ contains( github.event.pull_request.labels.*.name, 'ready') && ! github.event.pull_request.draft }}
     steps:
 
       - name: 'Wait for status checks'
