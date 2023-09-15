@@ -1,6 +1,7 @@
 from_owner:
   - pedrox-hs
-required_labels: []
+required_labels:
+  - ready
 apply_labels:
   - automerge
 blacklisted_labels:
