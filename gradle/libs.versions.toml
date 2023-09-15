@@ -2,6 +2,7 @@
 
 androidGradlePlugin = "8.1.1"
 kotlin = "1.9.10"
+detekt = "1.23.1"
 sonarCloud = "4.3.1.3277"
 
 androidx-core-ktx = "1.12.0"
@@ -28,6 +29,7 @@ testing-espresso-core = { module = "androidx.test.espresso:espresso-core", versi
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 sonarCloud = { id = "org.sonarqube", version.ref = "sonarCloud" }
 
 [bundles]

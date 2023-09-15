@@ -1,0 +1,7 @@
+formatting:
+  android: true
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated:
+      - "Composable"
