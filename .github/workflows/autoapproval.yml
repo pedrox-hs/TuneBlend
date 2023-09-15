@@ -2,7 +2,7 @@ name: Autoapproval workflow
 
 on:
   pull_request:
-    types: [ opened, reopened, ready_for_review, labeled, edited ]
+    types: [ opened, reopened, synchronize, ready_for_review, labeled ]
   pull_request_review:
     types: [ dismissed ]
 
@@ -10,11 +10,15 @@ permissions:
   contents: read
   pull-requests: write
 
+concurrency:
+  group: autoapproval-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   autoapproval:
     name: Autoapproval
     runs-on: ubuntu-latest
-    if: ${{ ! github.event.pull_request.draft }}
+    if: ${{ contains( github.event.pull_request.labels.*.name, 'ready') && ! github.event.pull_request.draft }}
     steps:
 
       - name: 'Wait for status checks'
