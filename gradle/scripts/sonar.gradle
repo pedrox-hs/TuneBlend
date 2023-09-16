@@ -1,33 +1,64 @@
 allprojects {
     apply plugin: libs.plugins.sonarCloud.get().pluginId
 
-    sonar {
-        def projectKey = findProperty('sonar.projectKey') ?: System.getenv('SONAR_PROJECT_KEY')
-        def organization = findProperty('sonar.organization') ?: System.getenv('SONAR_ORGANIZATION')
-        def hostUrl = findProperty('sonar.host.url') ?: System.getenv('SONAR_HOST_URL')
+    def projectKey = findProperty('sonar.projectKey') ?: System.getenv('SONAR_PROJECT_KEY')
+    def organization = findProperty('sonar.organization') ?: System.getenv('SONAR_ORGANIZATION')
+    def hostUrl = findProperty('sonar.host.url') ?: System.getenv('SONAR_HOST_URL')
 
+    sonar {
         properties {
             property('sonar.projectKey', projectKey)
+            property(
+                    'sonar.projectName',
+                    project.path == ':' ? rootProject.name : project.path.substring(1),
+            )
+
             property('sonar.organization', organization)
             property('sonar.host.url', hostUrl ?: 'https://sonarcloud.io')
 
+            properties["sonar.sources"] += project.extensions.findByName('android') ?
+                    [
+                            project.android.sourceSets.main.kotlin.srcDirs,
+                            project.android.sourceSets.debug.kotlin.srcDirs,
+                            project.android.sourceSets.release.kotlin.srcDirs,
+                    ] : []
+
+            properties["sonar.tests"] = properties["sonar.tests"] ?: []
+            properties["sonar.tests"] += project.extensions.findByName('android') ?
+                    [
+                            project.android.sourceSets.test.kotlin.srcDirs,
+                            project.android.sourceSets.androidTest.kotlin.srcDirs,
+                    ] : []
+
             property('sonar.androidLint.reportPaths', fileTree(
-                    dir: rootDir,
-                    include: '**/build/reports/lint-results*.xml'
-            ).collect { it.absolutePath }.join(','))
+                    dir: layout.buildDirectory,
+                    include: 'reports/lint-results*.xml'
+            ))
 
             property('sonar.kotlin.detekt.reportPaths', fileTree(
-                    dir: rootDir,
-                    include: '**/build/reports/detekt/*.xml',
-            ).collect { it.absolutePath }.join(','))
+                    dir: layout.buildDirectory,
+                    include: 'reports/detekt/**/*.xml',
+            ))
+
+            property('sonar.coverage.jacoco.xmlReportPaths', fileTree(
+                    dir: layout.buildDirectory,
+                    include: [
+                            'reports/jacoco/**/*.xml',
+                    ],
+            ))
 
             property('sonar.coverageReportPaths', fileTree(
-                    dir: rootDir,
+                    dir: layout.buildDirectory,
+                    include: 'reports/coverage/**/report.xml',
+            ))
+
+            property('sonar.testExecutionReportPaths', fileTree(
+                    dir: layout.buildDirectory,
                     include: [
-                            '**/build/reports/jacoco/**/jacocoTestReport.xml',
-                            '**/build/reports/coverage/**/report.xml',
-                    ]
-            ).collect { it.absolutePath }.join(','))
+                            'outputs/unit_test_code_coverage/**/*.exec',
+                            'outputs/code_coverage/**/*.ec',
+                    ],
+            ))
         }
     }
 }
