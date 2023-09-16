@@ -40,8 +40,15 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/*.gradle.kts', '**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-      - name: Build and analyze
+      - name: Build and analyze with SonarCloud
+        run: |
+          GRADLE_TASKS="lint detekt createDebugUnitTestCoverageReport "
+
+          if ./gradlew tasks --all | grep -qw "jacocoTestReport"; then
+            GRADLE_TASKS="$GRADLE_TASKS jacocoTestReport"
+          fi
+
+          ./gradlew $GRADLE_TASKS build sonar --info
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonar --info

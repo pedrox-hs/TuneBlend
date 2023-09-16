@@ -3,6 +3,7 @@
 androidGradlePlugin = "8.1.1"
 kotlin = "1.9.10"
 detekt = "1.23.1"
+jaCoCo = "0.8.9"
 sonarCloud = "4.3.1.3277"
 
 androidx-core-ktx = "1.12.0"
