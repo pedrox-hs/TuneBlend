@@ -26,6 +26,7 @@ tasks.matching {
 
 Project.metaClass.configureSonarProperties = {
     def project = delegate
+    def isAndroidProject = project.extensions.findByName('android') != null
 
     project.sonar {
         properties {
@@ -35,9 +36,9 @@ Project.metaClass.configureSonarProperties = {
             property('sonar.organization', organization)
             property('sonar.host.url', hostUrl ?: 'https://sonarcloud.io')
 
-            properties["sonar.sources"] += project.android?.sourceSets?.srcDirs() ?: []
+            properties["sonar.sources"] += isAndroidProject ? project.android.sourceSets.srcDirs() : []
             properties["sonar.tests"] = properties["sonar.tests"] ?: []
-            properties["sonar.tests"] += project.android?.sourceSets?.testDirs() ?: []
+            properties["sonar.tests"] += isAndroidProject ? project.android.sourceSets.testDirs() : []
 
             property('sonar.androidLint.reportPaths', "${layout.buildDirectory}/reports/lint-results*.xml")
             property('sonar.kotlin.detekt.reportPaths', "${layout.buildDirectory}/reports/detekt/**/*.xml")
