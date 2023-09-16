@@ -31,18 +31,8 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/*.gradle.kts', '**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Run lint and analyze with SonarCloud
-        run: ./gradlew lint sonar --info
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Run lint
+        run: ./gradlew lint --info
 
   detekt:
     name: Detekt
@@ -64,15 +54,5 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/*.gradle.kts', '**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Run detekt and analyze with SonarCloud
-        run: ./gradlew detekt sonar --info
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Run detekt
+        run: ./gradlew detekt --info

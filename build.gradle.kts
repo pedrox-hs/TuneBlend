@@ -6,6 +6,7 @@ plugins {
 }
 
 apply {
+    from("gradle/scripts/kotlin.gradle")
     from("gradle/scripts/jacoco.gradle")
     from("gradle/scripts/detekt.gradle")
     from("gradle/scripts/sonar.gradle")

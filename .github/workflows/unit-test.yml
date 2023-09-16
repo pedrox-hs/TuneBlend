@@ -11,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  android-unit-test:
-    name: Android Unit Test
+  unit-test:
+    name: Run unit tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,51 +34,5 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/*.gradle.kts', '**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
       - name: Run unit tests and generate coverage report
-        run: ./gradlew createDebugUnitTestCoverageReport sonar --info
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  jvm-unit-test:
-    name: JVM Unit Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: "zulu"
-
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/*.gradle.kts', '**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
-
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Run unit tests and generate coverage report
-        run: |
-          if ./gradlew tasks --all | grep -qw "jacocoTestReport"; then
-            ./gradlew jacocoTestReport sonar --info
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew testDebugUnitTest testJvmUnitTest --info

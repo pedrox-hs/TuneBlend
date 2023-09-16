@@ -1,0 +1,10 @@
+tasks.register('testJvmUnitTest') {
+    description = 'Run tests in JVM modules'
+    group = JavaBasePlugin.VERIFICATION_GROUP
+
+    dependsOn provider {
+        tasks.matching {
+            it instanceof Test && it.name == 'test'
+        }
+    }
+}
