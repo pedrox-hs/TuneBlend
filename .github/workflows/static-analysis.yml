@@ -28,7 +28,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/*.gradle') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/*.gradle.kts', '**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Cache SonarCloud packages
@@ -61,7 +61,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/*.gradle') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/*.gradle.kts', '**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Cache SonarCloud packages
