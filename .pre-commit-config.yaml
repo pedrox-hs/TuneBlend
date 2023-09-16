@@ -7,3 +7,13 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+
+  - repo: https://github.com/jguttman94/pre-commit-gradle
+    rev: v0.3.0
+    hooks:
+      - id: gradle-task
+        name: gradle lint
+        args: [ "-w", "-o", "lintFix" ]
+      - id: gradle-task
+        name: gradle detekt
+        args: [ "-w", "-o", "detekt -Pdetekt.autoCorrect" ]
