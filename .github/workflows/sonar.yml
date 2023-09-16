@@ -42,13 +42,18 @@ jobs:
 
       - name: Build and analyze with SonarCloud
         run: |
-          GRADLE_TASKS="lint detekt createDebugUnitTestCoverageReport "
+          GRADLE_TASKS_OUTPUT=$(./gradlew tasks --all)
+          GRADLE_TASKS=()
 
-          if ./gradlew tasks --all | grep -qw "jacocoTestReport"; then
-            GRADLE_TASKS="$GRADLE_TASKS jacocoTestReport"
+          if echo "$GRADLE_TASKS_OUTPUT" | grep -qw "jacocoTestReport"; then
+            GRADLE_TASKS+=("jacocoTestReport")
           fi
 
-          ./gradlew $GRADLE_TASKS build sonar --info
+          if echo "$GRADLE_TASKS_OUTPUT" | grep -qw "createDebugUnitTestCoverageReport"; then
+            GRADLE_TASKS+=("createDebugUnitTestCoverageReport")
+          fi
+
+          ./gradlew lint detekt "${GRADLE_TASKS[@]}" build sonar --info
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

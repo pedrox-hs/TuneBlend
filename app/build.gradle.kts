@@ -34,8 +34,4 @@ android {
 
 dependencies {
     implementation(libs.bundles.android.layout)
-
-    testImplementation(libs.bundles.testing.unit)
-
-    androidTestImplementation(libs.bundles.testing.android)
 }
