@@ -1,5 +1,10 @@
 # TuneBlend
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pedrox-hs_TuneBlend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pedrox-hs_TuneBlend)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=pedrox-hs_TuneBlend&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=pedrox-hs_TuneBlend)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=pedrox-hs_TuneBlend&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=pedrox-hs_TuneBlend)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pedrox-hs_TuneBlend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=pedrox-hs_TuneBlend)
+
 TuneBlend is a tool that enhances your experience with music and podcasts on Spotify, offering unique features to create custom playlists, categorize your music library, filter unliked songs, and rate your favorite tracks.
 
 ## Technologies Used
