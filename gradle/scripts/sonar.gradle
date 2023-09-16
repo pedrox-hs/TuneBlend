@@ -40,15 +40,30 @@ Project.metaClass.configureSonarProperties = {
             properties["sonar.tests"] = properties["sonar.tests"] ?: []
             properties["sonar.tests"] += isAndroidProject ? project.android.sourceSets.testDirs() : []
 
-            property('sonar.androidLint.reportPaths', "${layout.buildDirectory}/reports/lint-results*.xml")
-            property('sonar.kotlin.detekt.reportPaths', "${layout.buildDirectory}/reports/detekt/**/*.xml")
-            property('sonar.coverage.jacoco.xmlReportPaths', "${layout.buildDirectory}/reports/jacoco/**/*.xml",)
-            property('sonar.coverageReportPaths', "${layout.buildDirectory}/reports/coverage/**/report.xml")
+            property('sonar.androidLint.reportPaths', fileTree(
+                    dir: layout.buildDirectory,
+                    include: 'reports/lint-results*.xml',
+            ).files)
+            property('sonar.kotlin.detekt.reportPaths', fileTree(
+                    dir: layout.buildDirectory,
+                    include: 'reports/detekt/**/*.xml',
+            ).files)
+            property('sonar.coverage.jacoco.xmlReportPaths', fileTree(
+                    dir: layout.buildDirectory,
+                    include: 'reports/jacoco/**/*.xml',
+            ).files)
+            property('sonar.coverageReportPaths', fileTree(
+                    dir: layout.buildDirectory,
+                    include: 'reports/coverage/**/report.xml',
+            ).files)
 
-            property('sonar.testExecutionReportPaths', [
-                    "${layout.buildDirectory}/outputs/unit_test_code_coverage/**/*.exec",
-                    "${layout.buildDirectory}/outputs/code_coverage/**/*.ec",
-            ])
+            property('sonar.testExecutionReportPaths', fileTree(
+                    dir: layout.buildDirectory,
+                    include: [
+                            'outputs/unit_test_code_coverage/**/*.exec',
+                            'outputs/code_coverage/**/*.ec',
+                    ],
+            ).files)
         }
     }
 }
