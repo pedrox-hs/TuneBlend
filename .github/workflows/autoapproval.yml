@@ -18,7 +18,7 @@ jobs:
   autoapproval:
     name: Autoapproval
     runs-on: ubuntu-latest
-    if: ${{ contains( github.event.pull_request.labels.*.name, 'ready') && ! github.event.pull_request.draft }}
+    if: ${{ ! github.event.pull_request.draft }}
     steps:
 
       - name: 'Wait for status checks'
@@ -26,7 +26,7 @@ jobs:
         uses: "WyriHaximus/github-action-wait-for-status@47d6bc1a0a92ed8a9ba13b060f9f8c40ccd8b3ec"
         with:
           ignoreActions: "Autoapproval"
-          checkInterval: 30
+          checkInterval: 10
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
