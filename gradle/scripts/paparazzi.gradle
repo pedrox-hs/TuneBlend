@@ -1,0 +1,12 @@
+subprojects {
+    tasks.matching {
+        it.name ==~ /test[A-Z].+UnitTest/
+    }.configureEach { task ->
+        task.finalizedBy provider {
+            tasks.matching {
+                def variantName = task.variantName.capitalize() - 'UnitTest'
+                it.name == "verifyPaparazzi${variantName}"
+            }
+        }
+    }
+}
