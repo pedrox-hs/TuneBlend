@@ -1,0 +1,38 @@
+subprojects {
+    afterEvaluate {
+        if (!extensions.findByName("android")) return
+
+        def projectPath = rootDir.relativePath(projectDir)
+
+        android {
+            namespace = namespace ?: "com.trilobitech.${projectPath.replace('/', '.')}"
+            resourcePrefix = resourcePrefix != null ? resourcePrefix : "${projectPath.replace('/', '_')}_"
+
+            compileSdk = libs.versions.compileSdk.get() as int
+
+            defaultConfig {
+                minSdk = libs.versions.minSdk.get() as int
+            }
+
+            compileOptions {
+                def jdkVersion = libs.versions.jdk.get()
+
+                sourceCompatibility = jdkVersion
+                targetCompatibility = jdkVersion
+            }
+
+            buildTypes {
+                debug {
+                    debuggable = true
+
+                    enableUnitTestCoverage = sourceSets.test.kotlin.srcDirs.any {
+                        !fileTree(dir: it, include: '**/*Test.*').empty
+                    }
+                    enableAndroidTestCoverage = sourceSets.androidTest.kotlin.srcDirs.any {
+                        !fileTree(dir: it, include: '**/*Test.*').empty
+                    }
+                }
+            }
+        }
+    }
+}
