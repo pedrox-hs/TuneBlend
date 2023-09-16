@@ -21,4 +21,9 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "TuneBlend"
-include(":app")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+include(
+    ":app",
+    ":commons:ui",
+)
