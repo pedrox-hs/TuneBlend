@@ -2,24 +2,32 @@ allprojects {
     apply plugin: libs.plugins.sonarCloud.get().pluginId
 
     sonar {
-        def projectKey = findProperty("sonar.projectKey") ?: System.getenv("SONAR_PROJECT_KEY")
-        def organization = findProperty("sonar.organization") ?: System.getenv("SONAR_ORGANIZATION")
-        def hostUrl = findProperty("sonar.host.url") ?: System.getenv("SONAR_HOST_URL")
+        def projectKey = findProperty('sonar.projectKey') ?: System.getenv('SONAR_PROJECT_KEY')
+        def organization = findProperty('sonar.organization') ?: System.getenv('SONAR_ORGANIZATION')
+        def hostUrl = findProperty('sonar.host.url') ?: System.getenv('SONAR_HOST_URL')
 
         properties {
-            property("sonar.projectKey", projectKey)
-            property("sonar.organization", organization)
-            property("sonar.host.url", hostUrl ?: "https://sonarcloud.io")
+            property('sonar.projectKey', projectKey)
+            property('sonar.organization', organization)
+            property('sonar.host.url', hostUrl ?: 'https://sonarcloud.io')
 
-            property("sonar.androidLint.reportPaths", fileTree(
-                    dir: "${rootDir}",
-                    include: "**/build/reports/lint-results*.xml"
-            ).collect { it.absolutePath }.join(","))
+            property('sonar.androidLint.reportPaths', fileTree(
+                    dir: rootDir,
+                    include: '**/build/reports/lint-results*.xml'
+            ).collect { it.absolutePath }.join(','))
 
-            property("sonar.kotlin.detekt.reportPaths", fileTree(
-                    dir: "${rootDir}",
-                    include: "**/build/reports/detekt/*.xml",
-            ).collect { it.absolutePath }.join(","))
+            property('sonar.kotlin.detekt.reportPaths', fileTree(
+                    dir: rootDir,
+                    include: '**/build/reports/detekt/*.xml',
+            ).collect { it.absolutePath }.join(','))
+
+            property('sonar.coverageReportPaths', fileTree(
+                    dir: rootDir,
+                    include: [
+                            '**/build/reports/jacoco/**/jacocoTestReport.xml',
+                            '**/build/reports/coverage/**/report.xml',
+                    ]
+            ).collect { it.absolutePath }.join(','))
         }
     }
 }
