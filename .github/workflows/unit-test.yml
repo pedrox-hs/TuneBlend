@@ -41,7 +41,7 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Run unit tests
+      - name: Run unit tests and generate coverage report
         run: ./gradlew createDebugUnitTestCoverageReport sonar --info
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -74,7 +74,7 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Run unit tests
+      - name: Run unit tests and generate coverage report
         run: |
           if ./gradlew tasks --all | grep -qw "jacocoTestReport"; then
             ./gradlew jacocoTestReport sonar --info
