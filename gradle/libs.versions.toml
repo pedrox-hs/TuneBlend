@@ -38,7 +38,7 @@ detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-papanazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
+paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 sonarCloud = { id = "org.sonarqube", version.ref = "sonarCloud" }
 
 [bundles]
