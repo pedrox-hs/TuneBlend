@@ -18,6 +18,7 @@ android {
 
 dependencies {
     api(platform(libs.compose.bom))
+    implementation(libs.androidx.core.ktx)
     implementation(libs.compose.material3)
 
     debugImplementation(kotlin("reflect"))
