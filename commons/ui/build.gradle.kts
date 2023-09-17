@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.paparazzi)
 }
 
 android {
@@ -18,4 +19,6 @@ android {
 dependencies {
     api(platform(libs.compose.bom))
     implementation(libs.compose.material3)
+
+    debugImplementation(kotlin("reflect"))
 }

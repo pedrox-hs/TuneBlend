@@ -8,6 +8,7 @@ fun AppTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
+        typography = typography,
         content = content,
     )
 }
