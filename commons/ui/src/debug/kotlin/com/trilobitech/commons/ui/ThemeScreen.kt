@@ -19,8 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.sp
+import com.trilobitech.commons.ui.util.ColorSchemeTokens
 import com.trilobitech.commons.ui.util.TypographyTokens
+import com.trilobitech.commons.ui.util.calculateContrastColor
 import com.trilobitech.commons.ui.util.readField
 
 @Composable
@@ -28,6 +32,15 @@ fun TypographyScreen() {
     Screen {
         TypographyTokens.forEach { typeName ->
             Typography(typeName = typeName)
+        }
+    }
+}
+
+@Composable
+internal fun ColorSchemeScreen() {
+    Screen {
+        ColorSchemeTokens.forEach { colorName ->
+            ColorPalette(colorName = colorName)
         }
     }
 }
@@ -64,6 +77,30 @@ private fun Typography(
             text = typeName,
             color = colorScheme.onBackground,
             style = style,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .wrapContentSize(),
+        )
+    }
+}
+
+@Composable
+private fun ColumnScope.ColorPalette(
+    colorName: String,
+) {
+    val backgroundColor: Color = colorScheme.readField(colorName)
+    val textColor = calculateContrastColor(backgroundColor)
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .weight(1f)
+            .background(backgroundColor)
+    ) {
+        Text(
+            text = colorName,
+            color = textColor,
+            style = typography.bodySmall.copy(fontSize = 12.sp),
             modifier = Modifier
                 .align(Alignment.Center)
                 .wrapContentSize(),

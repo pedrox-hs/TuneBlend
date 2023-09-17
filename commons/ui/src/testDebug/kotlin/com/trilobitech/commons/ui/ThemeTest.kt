@@ -17,8 +17,43 @@ class ThemeTest {
     @Test
     fun showCorrectTypography() {
         paparazzi.snapshot {
-            AppTheme {
+            AppTheme(
+                useDarkTheme = false
+            ) {
                 TypographyScreen()
+            }
+        }
+    }
+
+    @Test
+    fun showCorrectTypographyOnDarkMode() {
+        paparazzi.snapshot {
+            AppTheme(
+                useDarkTheme = true
+            ) {
+                TypographyScreen()
+            }
+        }
+    }
+
+    @Test
+    fun showCorrectLightColorScheme() {
+        paparazzi.snapshot {
+            AppTheme(
+                useDarkTheme = false
+            ) {
+                ColorSchemeScreen()
+            }
+        }
+    }
+
+    @Test
+    fun showCorrectDarkColorScheme() {
+        paparazzi.snapshot {
+            AppTheme(
+                useDarkTheme = true
+            ) {
+                ColorSchemeScreen()
             }
         }
     }
