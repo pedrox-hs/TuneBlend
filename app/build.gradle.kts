@@ -41,5 +41,6 @@ android {
 }
 
 dependencies {
+    implementation(libs.compose.activity)
     implementation(projects.commons.ui)
 }
