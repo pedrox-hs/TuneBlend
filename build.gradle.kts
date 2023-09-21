@@ -12,5 +12,4 @@ group = "com.trilobitech"
 
 apply {
     from("gradle/scripts/sonar.gradle")
-    from("gradle/scripts/paparazzi.gradle")
 }

@@ -54,12 +54,12 @@ module-library = { id = "com.trilobitech.android.library" }
 module-jvm = { id = "com.trilobitech.jvm" }
 
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
-paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 sonarCloud = { id = "org.sonarqube", version.ref = "sonarCloud" }
 
 [bundles]
