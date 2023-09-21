@@ -5,7 +5,7 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=pedrox-hs_TuneBlend&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=pedrox-hs_TuneBlend)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pedrox-hs_TuneBlend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=pedrox-hs_TuneBlend)
 
-Welcome to TuneBlend, your ultimate music and podcast companion! TuneBlend enhances your Spotify experience with powerful features, including playlist merging, library categorization, and more. Join us on this musical journey! 🎶✨
+<!-- Welcome to TuneBlend, your ultimate music and podcast companion! TuneBlend enhances your Spotify experience with powerful features, including playlist merging, library categorization, and more. Join us on this musical journey! -->
 
 🚧 **Work in Progress** 🚧
 
