@@ -1,17 +1,9 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id(libs.plugins.module.application.get().pluginId)
 }
 
 android {
-    resourcePrefix = ""
-
     defaultConfig {
-        applicationId = "com.trilobitech.tuneblend"
-
-        versionCode = 1
-        versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
