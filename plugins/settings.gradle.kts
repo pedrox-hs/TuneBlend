@@ -6,6 +6,7 @@ pluginManagement {
     }
 }
 
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
@@ -16,8 +17,12 @@ dependencyResolutionManagement {
     }
 
     versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
+        create(defaultLibrariesExtensionName.get()) {
+            val file = file("../gradle/libs.versions.toml")
+            if (file.exists().not()) {
+                file("libs.versions.example.toml").copyTo(file, true)
+            }
+            from(files(file))
         }
     }
 }

@@ -9,7 +9,7 @@ plugins {
     id("com.trilobitech.commons.kotlin")
 }
 
-val namespacePrefix = rootProject.group
+val namespacePrefix: String = rootProject.group.toString()
 val projectPath = project.path.removePrefix(":")
 
 android {
