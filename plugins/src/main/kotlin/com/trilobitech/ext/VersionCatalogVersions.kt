@@ -33,6 +33,10 @@ class VersionAccessors(
     val detekt: Provider<String> = providerFactory.provider {
         catalog.findVersion("detekt").get().requiredVersion
     }
+
+    val jaCoCo: Provider<String> = providerFactory.provider {
+        catalog.findVersion("jaCoCo").get().requiredVersion
+    }
 }
 
 data class Version(val name: String, val code: Int) {

@@ -11,7 +11,6 @@ plugins {
 group = "com.trilobitech"
 
 apply {
-    from("gradle/scripts/jacoco.gradle")
     from("gradle/scripts/sonar.gradle")
     from("gradle/scripts/paparazzi.gradle")
 }
