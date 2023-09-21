@@ -6,6 +6,7 @@ repos:
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
+        exclude: '.idea/.*'
       - id: check-yaml
 
   - repo: https://github.com/jguttman94/pre-commit-gradle
@@ -14,6 +15,9 @@ repos:
       - id: gradle-task
         name: gradle lint
         args: [ "-w", "-o", "lintFix" ]
+        types:
+          - xml
       - id: gradle-task
         name: gradle detekt
-        args: [ "-w", "-o", "detekt -Pdetekt.autoCorrect" ]
+        args: [ "-w", "-o", "detekt --auto-correct" ]
+        files: \.kts?$

@@ -35,4 +35,4 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Run unit tests and generate coverage report
-        run: ./gradlew testDebugUnitTest testJvmUnitTest --info
+        run: ./gradlew unitTest --info
