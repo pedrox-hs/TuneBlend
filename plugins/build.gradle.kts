@@ -5,4 +5,5 @@ plugins {
 
 dependencies {
     implementation(kotlin("script-runtime"))
+    implementation(libs.gradle.plugin.kotlin)
 }

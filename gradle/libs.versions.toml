@@ -39,13 +39,18 @@ testing-junit = { module = "junit:junit", version.ref = "junit" }
 testing-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
 testing-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 
+gradle-plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 [plugins]
 
+module-jvm = { id = "com.trilobitech.jvm" }
+
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 sonarCloud = { id = "org.sonarqube", version.ref = "sonarCloud" }
