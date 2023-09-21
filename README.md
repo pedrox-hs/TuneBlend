@@ -11,7 +11,7 @@
 
 Hello there! 👋
 
-Thanks for visiting our repository. Please note that our app is currently in active development and not yet available for use. We're working hard to bring you an amazing experience, and we can't wait to share it with you soon! 🛠️✨
+Thanks for visiting my repository. Please note that my app is currently in active development and not yet available for use. I'm working to bring you an amazing experience, and I can't wait to share it with you soon! 🛠️✨
 
 Stay tuned for updates, and feel free to explore the code and contribute if you'd like. Your feedback and support are greatly appreciated! 🚀😊
 
