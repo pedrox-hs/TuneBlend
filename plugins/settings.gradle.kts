@@ -3,30 +3,23 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        includeBuild("plugins")
     }
 }
 
-@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 
     versionCatalogs {
-        create("deps") {
-            from(files("gradle/libs.versions.toml"))
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
         }
     }
 }
 
-rootProject.name = "TuneBlend"
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-include(
-    ":app",
-    ":commons:ui",
-)
+rootProject.name = "Plugins"
