@@ -1,5 +1,6 @@
 package com.trilobitech
 
+import app.cash.paparazzi.gradle.PaparazziPlugin
 import com.android.build.gradle.tasks.factory.AndroidUnitTest
 import com.trilobitech.ext.libs
 import com.trilobitech.ext.versions
@@ -49,16 +50,20 @@ rootProject.takeUnless {
         it matches "recordPaparazzi".toRegex()
     }
 }?.subprojects {
-    tasks.matching {
-        it is AndroidUnitTest
-    }.whenTaskAdded {
-        this as AndroidUnitTest
-        finalizedBy(provider {
-            val variantName = variantName.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase() else it.toString()
-            }.removeSuffix("UnitTest")
+    afterEvaluate {
+        if (!project.plugins.hasPlugin(PaparazziPlugin::class)) return@afterEvaluate
 
-            tasks.findByName("verifyPaparazzi${variantName}")
-        })
+        tasks.matching {
+            it is AndroidUnitTest
+        }.whenTaskAdded {
+            this as AndroidUnitTest
+            finalizedBy(provider {
+                val variantName = variantName.replaceFirstChar {
+                    if (it.isLowerCase()) it.titlecase() else it.toString()
+                }.removeSuffix("UnitTest")
+
+                tasks.findByName("verifyPaparazzi${variantName}")
+            })
+        }
     }
 }
