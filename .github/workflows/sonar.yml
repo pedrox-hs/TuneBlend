@@ -1,13 +1,13 @@
-name: SonarCloud
+name: SonarCloud Report
 
 on:
+  workflow_dispatch:
   workflow_run:
-    workflows: [Unit Test, Static Code Analysis]
-    types:
-      - completed
+    workflows: [ Static Code Analysis, Unit Test ]
+    types: [ completed ]
 
 concurrency:
-  group: sonar-${{ github.ref }}
+  group: sonar-${{ github.event.workflow_run.head_sha || github.sha }}
   cancel-in-progress: true
 
 jobs:
@@ -15,9 +15,16 @@ jobs:
     name: Build and analyze
     runs-on: ubuntu-latest
     steps:
+
+      - name: 'Wait for status checks'
+        id: waitforstatuschecks
+        uses: pedrox-hs/wait-on-complete@b2d141e59b0b58d557372c153e50c8f43bc64300
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: ${{ steps.waitforstatuschecks.outputs.ref }}
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -49,8 +56,24 @@ jobs:
         with:
           workflow: unit-test.yml
 
-      - name: Run SonarCloud analysis
-        run: ./gradlew buildDebug sonar --info
+      - name: Run SonarCloud analysis for PR
+        if: steps.waitforstatuschecks.outputs.pr
+        run: |
+          ./gradlew --info buildDebug sonar \
+            -Dsonar.pullrequest.key=$SONAR_PR_KEY \
+            -Dsonar.pullrequest.branch=$SONAR_BRANCH \
+            -Dsonar.pullrequest.base=$SONAR_PR_BASE
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_BRANCH: ${{ steps.waitforstatuschecks.outputs.branch }}
+          SONAR_PR_KEY: ${{ steps.waitforstatuschecks.outputs.pr }}
+          SONAR_PR_BASE: ${{ steps.waitforstatuschecks.outputs.prBase }}
+
+      - name: Run SonarCloud analysis for branch
+        if: ${{ !steps.waitforstatuschecks.outputs.pr }}
+        run: |
+          ./gradlew --info buildDebug sonar \
+            -Dsonar.branch=$SONAR_BRANCH
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_BRANCH: ${{ steps.waitforstatuschecks.outputs.branch }}
