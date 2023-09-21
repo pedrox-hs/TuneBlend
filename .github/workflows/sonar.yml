@@ -1,11 +1,10 @@
 name: SonarCloud
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [ opened, synchronize, reopened ]
+  workflow_run:
+    workflows: [Unit Test, Static Code Analysis]
+    types:
+      - completed
 
 concurrency:
   group: sonar-${{ github.ref }}
@@ -40,8 +39,18 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle
 
+      - name: Download static analysis artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: static-analysis.yml
+
+      - name: Download unit tests artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: unit-test.yml
+
       - name: Run SonarCloud analysis
-        run: ./gradlew sonar --info
+        run: ./gradlew buildDebug sonar --info
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

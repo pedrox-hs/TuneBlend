@@ -31,20 +31,6 @@ tasks.register("unitTest") {
     })
 }
 
-tasks.matching { task ->
-    task.name.startsWith("sonar")
-}.whenTaskAdded {
-    dependsOn(provider {
-        listOf(
-            "lint",
-            "detekt",
-            "jacocoTestReport",
-            "createDebugUnitTestCoverageReport",
-            "buildDebug",
-        ).mapNotNull { tasks.findByName(it) }
-    })
-}
-
 rootProject.takeUnless {
     gradle.startParameter.taskNames.any {
         it matches "recordPaparazzi".toRegex()
