@@ -47,6 +47,7 @@ detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", 
 
 [plugins]
 
+module-root = { id = "com.trilobitech.root-project", version.ref = "androidGradlePlugin" }
 module-application = { id = "com.trilobitech.android.application" }
 module-library = { id = "com.trilobitech.android.library" }
 module-jvm = { id = "com.trilobitech.jvm" }
