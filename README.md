@@ -1,11 +1,19 @@
-# TuneBlend
+# 🎵 TuneBlend App
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pedrox-hs_TuneBlend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pedrox-hs_TuneBlend)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=pedrox-hs_TuneBlend&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=pedrox-hs_TuneBlend)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=pedrox-hs_TuneBlend&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=pedrox-hs_TuneBlend)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pedrox-hs_TuneBlend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=pedrox-hs_TuneBlend)
 
-TuneBlend is a tool that enhances your experience with music and podcasts on Spotify, offering unique features to create custom playlists, categorize your music library, filter unliked songs, and rate your favorite tracks.
+Welcome to TuneBlend, your ultimate music and podcast companion! TuneBlend enhances your Spotify experience with powerful features, including playlist merging, library categorization, and more. Join us on this musical journey! 🎶✨
+
+🚧 **Work in Progress** 🚧
+
+Hello there! 👋
+
+Thanks for visiting our repository. Please note that our app is currently in active development and not yet available for use. We're working hard to bring you an amazing experience, and we can't wait to share it with you soon! 🛠️✨
+
+Stay tuned for updates, and feel free to explore the code and contribute if you'd like. Your feedback and support are greatly appreciated! 🚀😊
 
 ## Technologies Used
 
@@ -45,7 +53,7 @@ To use TuneBlend, follow these steps:
 
 ## Contribution
 
-We welcome contributions! You can suggest improvements or report issues through issues, or open pull requests directly on [GitHub](https://github.com/pedrox-hs/TuneBlend).
+Feel free to contribute or provide feedback. Together, we'll make TuneBlend even better! 🤝🚀
 
 ## License
 
