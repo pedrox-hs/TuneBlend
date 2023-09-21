@@ -29,6 +29,10 @@ class VersionAccessors(
     val androidSdkMin: Provider<String> = providerFactory.provider {
         catalog.findVersion("androidSdkMin").get().requiredVersion
     }
+
+    val detekt: Provider<String> = providerFactory.provider {
+        catalog.findVersion("detekt").get().requiredVersion
+    }
 }
 
 data class Version(val name: String, val code: Int) {

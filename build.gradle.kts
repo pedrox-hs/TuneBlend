@@ -6,14 +6,12 @@ plugins {
 
     alias(libs.plugins.sonarCloud) apply false
     alias(libs.plugins.paparazzi) apply false
-    alias(libs.plugins.detekt) apply false
 }
 
 group = "com.trilobitech"
 
 apply {
     from("gradle/scripts/jacoco.gradle")
-    from("gradle/scripts/detekt.gradle")
     from("gradle/scripts/sonar.gradle")
     from("gradle/scripts/paparazzi.gradle")
 }
