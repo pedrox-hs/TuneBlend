@@ -1,6 +1,21 @@
 package com.trilobitech
 
 import com.android.build.gradle.tasks.factory.AndroidUnitTest
+import com.trilobitech.ext.libs
+import com.trilobitech.ext.versions
+import com.trilobitech.tasks.SonarPropertiesTask
+
+plugins {
+    id("org.sonarqube")
+}
+
+sonar {
+    properties {
+        property("sonar.projectVersion", libs.versions.project.get().name)
+    }
+}
+
+tasks.register("sonarProperties", SonarPropertiesTask::class)
 
 tasks.register("unitTest") {
     description = "Run unit tests in all modules"
@@ -12,6 +27,20 @@ tasks.register("unitTest") {
                 task.name matches "^test(Debug|Jvm)UnitTest\$".toRegex()
             }
         }
+    })
+}
+
+tasks.matching { task ->
+    task.name.startsWith("sonar")
+}.whenTaskAdded {
+    dependsOn(provider {
+        listOf(
+            "lint",
+            "detekt",
+            "jacocoTestReport",
+            "createDebugUnitTestCoverageReport",
+            "buildDebug",
+        ).mapNotNull { tasks.findByName(it) }
     })
 }
 
