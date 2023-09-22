@@ -42,7 +42,7 @@ jobs:
           if-no-files-found: error
           retention-days: 3
           path: |
-            **/build/reports/**/*
+            **/build/reports/lint-results*.xml
 
   detekt:
     name: Detekt
@@ -75,4 +75,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
           path: |
-            **/build/reports/**/*
+            **/build/reports/detekt/**/*.xml
