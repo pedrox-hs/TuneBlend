@@ -50,15 +50,19 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: static-analysis.yml
-          allow_forks: false
-          path: ./
+          path: ./artifacts/
+          skip_unpack: true
 
       - name: Download unit tests artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: unit-test.yml
-          allow_forks: false
-          path: ./
+          path: ./artifacts/
+          skip_unpack: true
+
+      - name: Unzip all artifacts
+        run: |
+          unzip -q 'artifacts/*.zip' -d ./
 
       - name: Run SonarCloud analysis for PR
         if: steps.waitforstatuschecks.outputs.pr

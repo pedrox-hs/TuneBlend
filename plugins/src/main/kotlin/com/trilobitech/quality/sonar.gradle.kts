@@ -18,21 +18,13 @@ sonar {
         properties["sonar.sources"] = properties["sonar.sources"] ?: listOf<String>()
         properties["sonar.sources"] = listOf(
             properties["sonar.sources"],
-            files(*project.sourceDirSets.toTypedArray()).asFileTree
-                .matching {
-                    include("**/*.java", "**/*.kt", "**/*.kts", "**/*.xml")
-                }
-                .files,
+            project.sourceDirSets,
         )
 
         properties["sonar.tests"] = properties["sonar.tests"] ?: listOf<String>()
         properties["sonar.tests"] = listOf(
             properties["sonar.tests"],
-            files(*project.testSourceDirSets.toTypedArray()).asFileTree
-                .matching {
-                    include("**/*Test.*")
-                }
-                .files,
+            project.testSourceDirSets,
         )
 
         property(
