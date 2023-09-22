@@ -62,7 +62,7 @@ jobs:
 
       - name: Unzip all artifacts
         run: |
-          unzip -q 'artifacts/*.zip' -d ./
+          unzip -v 'artifacts/*.zip' -d ./
 
       - name: Run SonarCloud analysis for PR
         if: steps.waitforstatuschecks.outputs.pr
