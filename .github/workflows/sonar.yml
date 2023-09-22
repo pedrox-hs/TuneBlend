@@ -1,10 +1,11 @@
 name: SonarCloud Report
 
 on:
-  workflow_dispatch:
-  workflow_run:
-    workflows: [ Static Code Analysis, Unit Test ]
-    types: [ completed ]
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
 
 concurrency:
   group: sonar-${{ github.event.workflow_run.head_sha || github.sha }}
@@ -16,15 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: 'Wait for status checks'
-        id: waitforstatuschecks
-        uses: pedrox-hs/wait-on-complete@b2d141e59b0b58d557372c153e50c8f43bc64300
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: actions/checkout@v4
         with:
-          ref: ${{ steps.waitforstatuschecks.outputs.ref }}
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -64,24 +59,9 @@ jobs:
         run: |
           unzip -v 'artifacts/*.zip' -d ./
 
-      - name: Run SonarCloud analysis for PR
-        if: steps.waitforstatuschecks.outputs.pr
-        run: |
-          ./gradlew --info buildDebug sonar \
-            -Dsonar.pullrequest.key=$SONAR_PR_KEY \
-            -Dsonar.pullrequest.branch=$SONAR_BRANCH \
-            -Dsonar.pullrequest.base=$SONAR_PR_BASE
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_BRANCH: ${{ steps.waitforstatuschecks.outputs.branch }}
-          SONAR_PR_KEY: ${{ steps.waitforstatuschecks.outputs.pr }}
-          SONAR_PR_BASE: ${{ steps.waitforstatuschecks.outputs.prBase }}
-
-      - name: Run SonarCloud analysis for branch
+      - name: Run SonarCloud analysis
         if: ${{ !steps.waitforstatuschecks.outputs.pr }}
         run: |
-          ./gradlew --info buildDebug sonar \
-            -Dsonar.branch=$SONAR_BRANCH
+          ./gradlew sonar --info
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_BRANCH: ${{ steps.waitforstatuschecks.outputs.branch }}
