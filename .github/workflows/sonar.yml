@@ -50,11 +50,15 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: static-analysis.yml
+          allow_forks: false
+          path: ./
 
       - name: Download unit tests artifacts
         uses: dawidd6/action-download-artifact@v2
         with:
           workflow: unit-test.yml
+          allow_forks: false
+          path: ./
 
       - name: Run SonarCloud analysis for PR
         if: steps.waitforstatuschecks.outputs.pr
