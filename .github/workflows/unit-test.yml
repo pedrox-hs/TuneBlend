@@ -48,7 +48,6 @@ jobs:
           if-no-files-found: error
           retention-days: 3
           path: |
-            **/reports/coverage/**/report.xml
-            **/reports/jacoco/**/*.xml
+            **/build/reports/**/*
             **/unit_test_code_coverage/**/*.exec
             **/code_coverage/**/*.ec
