@@ -18,25 +18,34 @@ sonar {
         properties["sonar.sources"] = properties["sonar.sources"] ?: listOf<String>()
         properties["sonar.sources"] = listOf(
             properties["sonar.sources"],
-            project.sourceDirSets,
+            files(*project.sourceDirSets.toTypedArray()).asFileTree
+                .matching {
+                    include("**/*.java", "**/*.kt", "**/*.kts", "**/*.xml")
+                }
+                .files,
         )
+
         properties["sonar.tests"] = properties["sonar.tests"] ?: listOf<String>()
         properties["sonar.tests"] = listOf(
             properties["sonar.tests"],
-            project.testSourceDirSets,
+            files(*project.testSourceDirSets.toTypedArray()).asFileTree
+                .matching {
+                    include("**/*Test.*")
+                }
+                .files,
         )
 
         property(
             "sonar.androidLint.reportPaths",
             fileTree(layout.buildDirectory) {
                 include("reports/lint-results*.xml")
-            },
+            }.files,
         )
         property(
             "sonar.kotlin.detekt.reportPaths",
             fileTree(layout.buildDirectory) {
                 include("reports/detekt/**/*.xml")
-            },
+            }.files,
         )
 
         property(
@@ -46,7 +55,7 @@ sonar {
                     "reports/coverage/**/report.xml",
                     "reports/jacoco/**/*.xml",
                 )
-            },
+            }.files,
         )
         property(
             "sonar.coverageReportPaths",
@@ -55,7 +64,7 @@ sonar {
                     "reports/coverage/**/report.xml",
                     "reports/jacoco/**/*.xml",
                 )
-            },
+            }.files,
         )
 
         property(
@@ -65,7 +74,7 @@ sonar {
                     "unit_test_code_coverage/**/*.exec",
                     "code_coverage/**/*.ec",
                 )
-            },
+            }.files,
         )
 
         val sonarProperties = project.file("sonar.properties")
