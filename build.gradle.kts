@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.paparazzi) apply false
     alias(libs.plugins.detekt) apply false
 
-    alias(libs.plugins.module.root)
+    id(libs.plugins.module.root.get().pluginId)
 }
 
 group = "com.trilobitech"
