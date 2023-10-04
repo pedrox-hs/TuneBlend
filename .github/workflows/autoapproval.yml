@@ -1,37 +1,84 @@
 name: Autoapproval workflow
 
 on:
-  pull_request:
-    types: [ opened, reopened, synchronize, ready_for_review, labeled ]
-  pull_request_review:
-    types: [ dismissed ]
-
-permissions:
-  contents: read
-  pull-requests: write
+  workflow_run:
+    workflows:
+      - Alls green
+    types:
+      - completed
 
 concurrency:
   group: autoapproval-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  approval-list: # save workflow time by not running if not needed
+    name: Check labels
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    outputs:
+      matrix: ${{ steps.pr-info.outputs.result }}
+
+    steps:
+      - name: Get Pull Request data
+        id: pr-info
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const pullRequests = context.payload.workflow_run.pull_requests;
+            const { name: repoName, owner: { login: ownerName } } = context.payload.workflow_run.repository;
+
+            let approvals = [];
+
+            for (const pr of pullRequests) {
+              // get pull request data
+              const { data: pullRequest } = await github.rest.pulls.get({
+                owner: ownerName,
+                repo: repoName,
+                pull_number: pr.number,
+              });
+
+              // if PR is not open or is a draft, skip
+              if (pullRequest.draft || pullRequest.status !== 'open') {
+                continue;
+              }
+
+              // get collaborator permission level
+              const { data: { permission } } = await github.rest.repos.getCollaboratorPermissionLevel({
+                owner: ownerName,
+                repo: repoName,
+                username: pullRequest.user.login,
+              });
+
+              // only add PRs that have write or admin permissions
+              if (permission == 'admin' || permission == 'write') {
+                approvals.push({
+                  owner: ownerName,
+                  repo: repoName,
+                  number: pullRequest.number,
+                });
+              }
+            }
+
+            return approvals;
+
   autoapproval:
     name: Autoapproval
     runs-on: ubuntu-latest
-    if: ${{ ! github.event.pull_request.draft }}
+    needs: approval-list
+    permissions:
+      contents: read
+      pull-requests: write
+
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.approval-list.outputs.matrix )}}
+
     steps:
-
-      - name: 'Wait for status checks'
-        id: waitforstatuschecks
-        uses: "WyriHaximus/github-action-wait-for-status@47d6bc1a0a92ed8a9ba13b060f9f8c40ccd8b3ec"
-        with:
-          ignoreActions: "Autoapproval"
-          checkInterval: 10
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
       - name: Autoapproval
         uses: pedrox-hs/autoapproval@main
-        if: steps.waitforstatuschecks.outputs.status == 'success'
+        with:
+          repository: "${{ matrix.owner }}/${{ matrix.repo }}"
+          pull_number: ${{ matrix.number }}
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
