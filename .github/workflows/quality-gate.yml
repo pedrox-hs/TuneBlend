@@ -61,7 +61,6 @@ jobs:
   unit-test:
     name: Run unit tests
     runs-on: ubuntu-latest
-    needs: [ android-lint, detekt ]
     steps:
 
       - name: Checkout
