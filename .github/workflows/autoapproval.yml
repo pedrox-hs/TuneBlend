@@ -63,7 +63,9 @@ jobs:
             }
 
             github.log.debug(`Approvals: ${JSON.stringify(approvals, null, 2)}`);
-            return approvals;
+            return {
+              include: approvals,
+            };
 
   autoapproval:
     name: Autoapproval
