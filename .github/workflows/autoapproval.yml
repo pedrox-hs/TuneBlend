@@ -84,6 +84,6 @@ jobs:
         uses: pedrox-hs/autoapproval@main
         with:
           repository: "${{ matrix.owner }}/${{ matrix.repo }}"
-          pull_number: ${{ matrix.number }}
+          pr_number: ${{ matrix.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
