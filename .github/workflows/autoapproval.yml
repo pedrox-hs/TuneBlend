@@ -17,11 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.workflow_run.conclusion == 'success'
     outputs:
-      matrix: ${{ steps.pr-info.outputs.result }}
+      matrix: ${{ steps.prs.outputs.result }}
 
     steps:
       - name: Get Pull Request data
-        id: pr-info
+        id: prs
         uses: actions/github-script@v6
         with:
           script: |
@@ -71,6 +71,7 @@ jobs:
     name: Autoapproval
     runs-on: ubuntu-latest
     needs: approval-list
+    if: ${{ needs.approval-list.outputs.matrix && needs.approval-list.outputs.matrix != '{"include":[]}' }}
     permissions:
       contents: read
       pull-requests: write
