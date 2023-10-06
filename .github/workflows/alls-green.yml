@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check:
+  alls-green-check:
     runs-on: ubuntu-latest
 
     steps:
