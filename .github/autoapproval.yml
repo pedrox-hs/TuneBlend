@@ -4,5 +4,5 @@ required_labels:
   - autoapprove
 apply_labels:
   - automerge
-blacklisted_labels:
+ignored_labels:
   - wip
