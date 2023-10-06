@@ -39,7 +39,8 @@ jobs:
               });
 
               // if PR is not open or is a draft, skip
-              if (pullRequest.draft || pullRequest.status !== 'open') {
+              if (pullRequest.draft || pullRequest.state !== 'open') {
+                github.log.debug(`Skipping PR #${pullRequest.number} with state ${pullRequest.state}.`);
                 continue;
               }
 
@@ -51,6 +52,7 @@ jobs:
               });
 
               // only add PRs that have write or admin permissions
+              github.log.debug(`The collaborator ${pullRequest.user.login} has permission ${permission}.`);
               if (permission == 'admin' || permission == 'write') {
                 approvals.push({
                   owner: ownerName,
@@ -60,6 +62,7 @@ jobs:
               }
             }
 
+            github.log.debug(`Approvals: ${JSON.stringify(approvals, null, 2)}`);
             return approvals;
 
   autoapproval:
