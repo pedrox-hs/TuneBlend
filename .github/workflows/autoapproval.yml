@@ -1,4 +1,4 @@
-name: Autoapproval workflow
+name: Autoapproval
 
 on:
   workflow_run:
@@ -12,8 +12,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  approval-list: # save workflow time by not running if not needed
-    name: Check labels
+  approval-list:
+    name: Generate approval list
     runs-on: ubuntu-latest
     if: github.event.workflow_run.conclusion == 'success'
     outputs:
