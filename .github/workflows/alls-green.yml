@@ -19,14 +19,16 @@ jobs:
           script: |
             const checkInterval = 30000; // 30 seconds
             let hasPendingChecks = true;
+            const jobName = context.job;
 
             while (hasPendingChecks) {
-              const { data: { check_runs: checkRuns } } = await github.checks.listForRef({
+              let { data: { check_runs: checkRuns } } = await github.rest.checks.listForRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 ref: context.ref,
                 per_page: 100,
               });
+              checkRuns = checkRuns.filter(checkRun => checkRun.name !== jobName);
 
               // get all status
               const statuses = checkRuns.map(checkRun => checkRun.status);
