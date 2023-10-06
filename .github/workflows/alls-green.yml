@@ -27,15 +27,19 @@ jobs:
                 ref: context.ref,
                 per_page: 100,
               });
-              checkRuns = checkRuns.filter(checkRun => checkRun.name !== jobName);
+              checkRuns = checkRuns.filter(checkRun => checkRun.name !== jobName).map(checkRun => {
+                return {
+                  name: checkRun.name,
+                  status: checkRun.status,
+                  conclusion: checkRun.conclusion,
+                };
+              });
 
-              // get all status
-              const statuses = checkRuns.map(checkRun => checkRun.status);
               // check if all is completed
-              const allCompleted = statuses.every(status => status === 'completed');
-              hasPendingChecks = !allCompleted;
+              const pendingChecks = checkRuns.filter(checkRun => checkRun.status !== 'completed');
+              hasPendingChecks = pendingChecks.length > 0;
 
-              if (allCompleted) {
+              if (!hasPendingChecks) {
                 // check if all check runs completions is success or neutral
                 const allSuccess = checkRuns.every(checkRun => checkRun.conclusion === 'success' || checkRun.conclusion === 'neutral');
                 // if not success workfow is failed
@@ -44,6 +48,9 @@ jobs:
                   return;
                 }
               }
+
+              github.log.warn(`Waiting for checks to complete.`);
+              github.log.warn(JSON.stringify(checkRuns, null, 2));
 
               await new Promise(resolve => setTimeout(resolve, checkInterval));
             }
