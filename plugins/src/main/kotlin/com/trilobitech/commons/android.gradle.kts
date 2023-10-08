@@ -11,6 +11,7 @@ plugins {
 
 val namespacePrefix: String = rootProject.group.toString()
 val projectPath = project.path.removePrefix(":")
+val jdkVersion: JavaVersion = JavaVersion.toVersion(libs.versions.jdk.get())
 
 android {
     namespace = "${namespacePrefix}.${projectPath.replace(':', '.')}"
@@ -23,8 +24,6 @@ android {
     }
 
     compileOptions {
-        val jdkVersion = JavaVersion.toVersion(libs.versions.jdk.get())
-
         sourceCompatibility = jdkVersion
         targetCompatibility = jdkVersion
     }
@@ -46,4 +45,8 @@ android {
             }.isEmpty.not()
         }
     }
+}
+
+kotlin {
+    jvmToolchain(jdkVersion.majorVersion.toInt())
 }
