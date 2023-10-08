@@ -23,5 +23,6 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(
     ":app",
     ":commons:router:annotations",
+    ":commons:router:compiler",
     ":commons:ui",
 )
