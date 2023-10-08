@@ -9,6 +9,8 @@ jdk = "17"
 androidSdkCompile = "34"
 androidSdkMin = "24"
 
+ksp = "1.9.10-1.0.13"
+
 sonarqube = "4.4.1.3373"
 detekt = "1.23.1"
 jaCoCo = "0.8.9"
@@ -23,11 +25,14 @@ compose-compiler = "1.5.3"
 compose-activity = "1.8.0"
 
 junit = "4.13.2"
+ksp-test = "1.5.0"
 
 androidx-junit = "1.1.5"
 espresso = "3.5.1"
 
 [libraries]
+
+kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
@@ -38,6 +43,7 @@ compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity" }
 
 testing-junit = { module = "junit:junit", version.ref = "junit" }
+testing-ksp = { module = "com.github.tschuchortdev:kotlin-compile-testing-ksp", version.ref = "ksp-test" }
 
 testing-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
 testing-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
@@ -60,6 +66,7 @@ android-application = { id = "com.android.application", version.ref = "androidGr
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
