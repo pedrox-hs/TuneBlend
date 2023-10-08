@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.sonarqube) apply true
     alias(libs.plugins.paparazzi) apply false
     alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.ksp) apply false
 
     id(libs.plugins.module.root.get().pluginId)
 }

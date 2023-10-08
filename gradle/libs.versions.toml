@@ -9,6 +9,8 @@ jdk = "17"
 androidSdkCompile = "34"
 androidSdkMin = "24"
 
+ksp = "1.9.10-1.0.13"
+
 sonarqube = "4.4.1.3373"
 detekt = "1.23.1"
 jaCoCo = "0.8.9"
@@ -28,6 +30,8 @@ androidx-junit = "1.1.5"
 espresso = "3.5.1"
 
 [libraries]
+
+kspApi = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
@@ -60,6 +64,7 @@ android-application = { id = "com.android.application", version.ref = "androidGr
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
 paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
