@@ -22,5 +22,6 @@ rootProject.name = "TuneBlend"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(
     ":app",
+    ":commons:router:annotations",
     ":commons:ui",
 )
