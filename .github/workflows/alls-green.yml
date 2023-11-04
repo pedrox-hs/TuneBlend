@@ -1,11 +1,11 @@
-name: Alls green
+name: Alls green workflow
 
 on:
   push:
+    branches:
+      - main
   pull_request:
-    types: [ labeled, ready_for_review ]
-  pull_request_review:
-    types: [ dismissed ]
+    types: [opened, reopened, synchronize, ready_for_review, labeled]
 
 concurrency:
   group: alls-green-${{ github.sha }}
@@ -18,3 +18,5 @@ jobs:
     steps:
       - name: Wait on checks
         uses: pedrox-hs/all-green-checks@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
