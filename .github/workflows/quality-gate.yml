@@ -46,10 +46,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: ./artifacts/
+          pattern: "*-artifact"
+          merge-multiple: true
 
       - name: Copy artifacts to project
         run: |
-          rsync -av artifacts/*/* .
+          rsync -av artifacts/* .
 
       - name: Run SonarCloud analysis
         run: |
