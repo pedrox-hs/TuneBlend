@@ -3,7 +3,7 @@
 project = "0.1.0+1"
 
 androidGradlePlugin = "8.2.0"
-kotlin = "1.9.21"
+kotlin = "1.9.22"
 
 jdk = "17"
 androidSdkCompile = "34"
