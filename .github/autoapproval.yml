@@ -1,8 +1,9 @@
 from_owner:
   - pedrox-hs
+  - create-issue-branch[bot]
 required_labels:
-  - autoapprove
+  - autoapproval
 apply_labels:
   - automerge
-ignored_labels:
+blacklisted_labels:
   - wip
