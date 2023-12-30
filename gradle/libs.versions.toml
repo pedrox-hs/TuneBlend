@@ -3,7 +3,7 @@
 project = "0.1.0+1"
 
 androidGradlePlugin = "8.2.0"
-kotlin = "1.9.10"
+kotlin = "1.9.21"
 
 jdk = "17"
 androidSdkCompile = "34"
@@ -21,7 +21,7 @@ androidx-appcompat = "1.6.1"
 google-material = "1.11.0"
 
 compose-bom = "2023.10.01"
-compose-compiler = "1.5.3"
+compose-compiler = "1.5.7"
 compose-activity = "1.8.2"
 
 junit = "4.13.2"
