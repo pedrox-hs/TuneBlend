@@ -89,7 +89,7 @@ jobs:
             | xargs ./gradlew --info
 
       - name: Upload tests artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: '!cancelled()'
         with:
           name: tests-artifact
@@ -127,7 +127,7 @@ jobs:
         run: ./gradlew lint --info
 
       - name: Upload Android lint artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: '!cancelled()'
         with:
           name: android-lint-artifact
@@ -160,7 +160,7 @@ jobs:
         run: ./gradlew detekt --info
 
       - name: Upload detekt artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: '!cancelled()'
         with:
           name: detekt-artifact
