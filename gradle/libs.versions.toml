@@ -2,7 +2,7 @@
 
 project = "0.1.0+1"
 
-androidGradlePlugin = "8.2.0"
+androidGradlePlugin = "8.2.1"
 kotlin = "1.9.21"
 
 jdk = "17"
