@@ -1,7 +1,9 @@
 package com.trilobitech.quality
 
+import com.trilobitech.ext.libs
 import com.trilobitech.ext.sourceDirSets
 import com.trilobitech.ext.testSourceDirSets
+import com.trilobitech.ext.versions
 import java.util.Properties
 
 plugins {
