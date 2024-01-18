@@ -29,14 +29,14 @@ jobs:
           distribution: 'zulu'
 
       - name: Cache Gradle packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/gradle-wrapper.properties') }}
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Cache SonarCloud packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
@@ -78,7 +78,7 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Cache Gradle packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/gradle-wrapper.properties') }}
@@ -119,7 +119,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Cache Gradle packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml', '**/gradle-wrapper.properties') }}
@@ -152,7 +152,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Cache Gradle packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/libs.versions.toml') }}
