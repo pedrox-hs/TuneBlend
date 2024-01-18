@@ -1,7 +1,9 @@
 package com.trilobitech.quality
 
+import com.trilobitech.ext.libs
 import com.trilobitech.ext.sourceDirSets
 import com.trilobitech.ext.testSourceDirSets
+import com.trilobitech.ext.versions
 import java.util.Properties
 
 plugins {
@@ -14,6 +16,7 @@ sonar {
             "sonar.projectName",
             project.path.takeUnless { it == ":" }?.removePrefix(":") ?: project.name,
         )
+        property("sonar.projectVersion", libs.versions.project.get().name)
 
         properties["sonar.sources"] = properties["sonar.sources"] ?: listOf<String>()
         properties["sonar.sources"] = listOf(
