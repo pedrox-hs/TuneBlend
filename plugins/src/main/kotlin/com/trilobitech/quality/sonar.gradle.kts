@@ -14,6 +14,7 @@ sonar {
             "sonar.projectName",
             project.path.takeUnless { it == ":" }?.removePrefix(":") ?: project.name,
         )
+        property("sonar.projectVersion", libs.versions.project.get().name)
 
         properties["sonar.sources"] = properties["sonar.sources"] ?: listOf<String>()
         properties["sonar.sources"] = listOf(
