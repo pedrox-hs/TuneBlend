@@ -4,6 +4,9 @@ import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.provider.Provider
 
+val VersionCatalog.guava: Provider<MinimalExternalModuleDependency>
+    get() = findLibrary("guava").get()
+
 val VersionCatalog.detekt: DetektAccessors
     get() = DetektAccessors(this)
 
