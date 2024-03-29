@@ -40,6 +40,7 @@ androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "a
 google-material = { module = "com.google.android.material:material", version.ref = "google-material" }
 
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compose-compiler" }
 compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "compose-activity" }
 
