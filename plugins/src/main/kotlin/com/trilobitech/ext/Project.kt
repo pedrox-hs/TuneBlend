@@ -8,7 +8,7 @@ import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.getByType
 import java.io.File
 
-typealias AndroidCommonExtension = CommonExtension<*, *, *, *, *>
+typealias AndroidCommonExtension = CommonExtension<*, *, *, *, *, *>
 
 val Project.libs: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
@@ -16,7 +16,7 @@ val Project.libs: VersionCatalog
 val Project.isAndroidModule: Boolean
     get() = extensions.findByType(CommonExtension::class) != null
 
-val Project.android: CommonExtension<*, *, *, *, *>
+val Project.android: AndroidCommonExtension
     get() = extensions.getByType(CommonExtension::class)
 
 fun Project.android(
