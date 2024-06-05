@@ -3,5 +3,20 @@
   "extends": [
     "config:base"
   ],
-  "labels": ["dependencies", "automerge"]
+  "labels": ["dependencies", "automerge"],
+  {
+    "packageRules": [
+      {
+        "matchPackageNames": [
+          "org.jetbrains.kotlin:kotlin-gradle-plugin",
+          "org.jetbrains.kotlin.jvm",
+          "com.google.devtools.ksp:symbol-processing-api",
+          "com.github.tschuchortdev:kotlin-compile-testing-ksp",
+          "androidx.compose.compiler:compiler"
+        ],
+        "groupName": "Kotlin, KSP, KSP test and Compose Compiler dependencies",
+        "groupSlug": "kotlin+ksp+ksp.test+compose.compiler"
+      }
+    ]
+  }
 }
