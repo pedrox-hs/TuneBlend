@@ -12,6 +12,7 @@
       "matchPackageNames": [
         "org.jetbrains.kotlin:kotlin-gradle-plugin",
         "org.jetbrains.kotlin.jvm",
+        "com.google.devtools.ksp",
         "com.google.devtools.ksp:symbol-processing-api",
         "com.github.tschuchortdev:kotlin-compile-testing-ksp",
         "androidx.compose.compiler:compiler"
