@@ -1,5 +1,6 @@
 plugins {
     id(libs.plugins.module.library.get().pluginId)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.paparazzi)
 }
 
@@ -8,10 +9,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 }
 

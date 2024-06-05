@@ -2,6 +2,7 @@ import java.util.Properties
 
 plugins {
     id(libs.plugins.module.application.get().pluginId)
+    alias(libs.plugins.compose.compiler)
 }
 
 private val debugKeystorePath = "debug.keystore"
@@ -47,10 +48,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
     packaging {
