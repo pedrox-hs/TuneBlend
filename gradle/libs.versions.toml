@@ -21,7 +21,7 @@ androidx-appcompat = "1.7.0"
 google-material = "1.12.0"
 
 compose-bom = "2024.03.00"
-compose-compiler = "1.5.11"
+compose-compiler = "1.5.14"
 compose-activity = "1.8.2"
 
 junit = "4.13.2"
