@@ -25,7 +25,7 @@ compose-compiler = "1.5.11"
 compose-activity = "1.8.2"
 
 junit = "4.13.2"
-ksp-test = "1.5.0"
+ksp-test = "1.6.0"
 
 androidx-junit = "1.1.5"
 espresso = "3.5.1"
