@@ -7,8 +7,10 @@ import com.tschuchort.compiletesting.kspSourcesDir
 import com.tschuchort.compiletesting.symbolProcessorProviders
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
+import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.Test
 
+@OptIn(ExperimentalCompilerApi::class)
 class RouterProcessorTest {
     @Test
     fun `should generate routes function`() {
