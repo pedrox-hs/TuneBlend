@@ -9,30 +9,6 @@ import com.trilobitech.ext.guava
 import org.gradle.api.attributes.java.TargetJvmEnvironment.STANDARD_JVM
 import org.gradle.api.attributes.java.TargetJvmEnvironment.TARGET_JVM_ENVIRONMENT_ATTRIBUTE
 
-subprojects {
-    plugins.withType<PaparazziPlugin> {
-        // Defer until afterEvaluate so that testImplementation is created by Android plugin.
-        afterEvaluate {
-            dependencies.constraints {
-                addTestImplementation(libs.guava.get().module.toString()) {
-                    attributes {
-                        attribute(
-                            TARGET_JVM_ENVIRONMENT_ATTRIBUTE,
-                            objects.named(TargetJvmEnvironment::class, STANDARD_JVM),
-                        )
-                    }
-                    because(
-                        """
-                        LayoutLib and sdk-common depend on Guava's -jre published variant.
-                        See https://github.com/cashapp/paparazzi/issues/906.
-                        """.trimIndent()
-                    )
-                }
-            }
-        }
-    }
-}
-
 rootProject.takeUnless {
     gradle.startParameter.taskNames.any {
         it matches "recordPaparazzi".toRegex()
