@@ -27,7 +27,7 @@ junit = "4.13.2"
 ksp-test = "1.6.0"
 
 androidx-junit = "1.2.1"
-espresso = "3.5.1"
+espresso = "3.6.1"
 
 [libraries]
 
