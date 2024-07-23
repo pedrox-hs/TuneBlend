@@ -19,6 +19,16 @@
       ],
       "groupName": "Kotlin, KSP, KSP test and Compose Compiler dependencies",
       "groupSlug": "kotlin+ksp+ksp.test+compose.compiler"
+    },
+    {
+      "matchPackageNames": [
+        "gradle",
+        "com.android.library",
+        "com.android.application",
+        "com.android.tools.build:gradle"
+      ],
+      "groupName": "Gradle and AGP",
+      "groupSlug": "gradle+agp"
     }
   ]
 }
