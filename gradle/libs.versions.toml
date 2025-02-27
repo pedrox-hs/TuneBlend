@@ -3,13 +3,13 @@
 project = "0.1.1+2"
 
 androidGradlePlugin = "8.8.0"
-kotlin = "2.0.21"
+kotlin = "2.1.10"
 
 jdk = "17"
 androidSdkCompile = "35"
 androidSdkMin = "24"
 
-ksp = "2.0.21-1.0.28"
+ksp = "2.1.10-1.0.31"
 
 sonarqube = "6.0.1.5171"
 detekt = "1.23.7"
